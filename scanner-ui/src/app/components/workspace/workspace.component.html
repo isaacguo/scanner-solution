@@ -1,0 +1,168 @@
+<h1 class="page-header">工作区</h1>
+
+<style>
+  .my-drop-zone {
+    border: dotted 3px lightgray;
+  }
+
+  .nv-file-over {
+    border: dotted 3px red;
+  }
+
+  /* Default class applied to drop zones on over */
+  .another-file-over-class {
+    border: dotted 3px green;
+  }
+
+  html, body {
+    height: 100%;
+  }
+</style>
+
+<modal #createNewTaskModal (onClose)="onCreateNewTaskModalClosed()">
+  <form #createNewTaskForm="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">新建扫描任务</h4>
+    </modal-header>
+    <modal-body>
+
+      <div ng2FileDrop
+           [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+           (fileOver)="fileOverBase($event)"
+           [uploader]="uploader"
+           class="well my-drop-zone">
+        拖动文件夹至此区域
+      </div>
+
+      <div>
+
+        <h5>上传列表</h5>
+        <p>数量: {{ uploader?.queue?.length }}</p>
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th width="50%">名称</th>
+            <th>大小</th>
+            <th>进度</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of uploader.queue">
+            <td><strong>{{ item?.file?.name }}</strong></td>
+            <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+            <td *ngIf="uploader.isHTML5">
+              <div class="progress" style="margin-bottom: 0;">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+              </div>
+            </td>
+            <td class="text-center">
+              <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+              <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+              <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+            </td>
+            <td nowrap>
+              <button type="button" class="btn btn-success btn-xs"
+                      (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                <span class="glyphicon glyphicon-upload"></span> 上传
+              </button>
+              <button type="button" class="btn btn-warning btn-xs"
+                      (click)="item.cancel()" [disabled]="!item.isUploading">
+                <span class="glyphicon glyphicon-ban-circle"></span> 取消
+              </button>
+              <button type="button" class="btn btn-danger btn-xs"
+                      (click)="item.remove()">
+                <span class="glyphicon glyphicon-trash"></span> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-default" data-dismiss="createNewTaskModal"
+              (click)="createNewTaskModal.dismiss()">取消
+      </button>
+      <button type="button" class="btn btn-primary" [disabled]="!createNewTaskForm.valid"
+              (click)="createNewTaskModal.close()">开始
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div class="jumbotron">
+  <div class="row">
+    <div class="form-group">
+      <label>工作流程</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a href="javascript:void(0)" class="list-group-item">
+          新建扫描任务
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <span class="glyphicon glyphicon-arrow-right"></span>
+      </li>
+      <li class="list-inline-item">
+        <a href="javascript:void(0)" class="list-group-item">
+          任务在扫描列表中等待被扫描
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <span class="glyphicon glyphicon-arrow-right"></span>
+      </li>
+      <li class="list-inline-item">
+        <a href="javascript:void(0)" class="list-group-item">
+          扫描完成进入待处理列表
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <span class="glyphicon glyphicon-arrow-right"></span>
+      </li>
+      <li class="list-inline-item">
+        <a href="javascript:void(0)" class="list-group-item">
+          人工处理检查校正
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <span class="glyphicon glyphicon-arrow-right"></span>
+      </li>
+      <li class="list-inline-item">
+        <a href="javascript:void(0)" class="list-group-item">
+          任务完成
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="btn-toolbar" role="toolbar" aria-label="...">
+    <div class="btn-group" role="group" aria-label="newTask">
+      <button type="button" class="btn btn-default" (click)="onCreateNewTaskButtonClicked(createNewTaskModal)"><span
+        class="glyphicon glyphicon-plus"> 新建扫描任务</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <ul class="nav nav-tabs">
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" role="presentation"><a
+      routerLink="/workspace/scanning-queue">扫描列表</a></li>
+    <li [routerLinkActive]="['active']" role="presentation"><a routerLink="/workspace/waiting-queue">待处理列表</a></li>
+  </ul>
+</div>
+
+<router-outlet></router-outlet>
+
