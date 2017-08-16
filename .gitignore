@@ -319,3 +319,4 @@ __pycache__/
 # !tools/packages.config
 
 scanner-ui/tools/
+scanner-gateway/src/main/resources/static/
