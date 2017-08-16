@@ -11,6 +11,8 @@
 
     <artifactId>scanner-common</artifactId>
 
+    <name>Scanner Common</name>
+
 
     <build>
         <plugins>

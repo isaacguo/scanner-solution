@@ -1,4 +1,4 @@
-package com.mlreceipt.scanner.scannerdata.restcontrollers;
+package com.mlreceipt.scanner.data.restcontrollers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

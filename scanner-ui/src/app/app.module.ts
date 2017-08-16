@@ -13,6 +13,8 @@ import {NotFoundComponent} from './components/notfound/notfound.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {WaitingQueueComponent} from './components/workspace/waiting-queue/waiting-queue.component';
 import { ScanningQueueComponent } from './components/workspace/scanning-queue/scanning-queue.component';
+import {UploadService} from "./services/upload.service";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -25,10 +27,12 @@ import { ScanningQueueComponent } from './components/workspace/scanning-queue/sc
     ScanningQueueComponent,
   ],
   imports: [
-    BrowserModule, FormsModule, routing, Ng2Bs3ModalModule, FileUploadModule,
+    BrowserModule, FormsModule, routing, Ng2Bs3ModalModule, FileUploadModule, HttpModule
   ],
   providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    UploadService
+
   ],
   bootstrap: [AppComponent]
 })

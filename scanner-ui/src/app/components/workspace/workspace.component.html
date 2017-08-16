@@ -44,9 +44,11 @@
           <tr>
             <th width="50%">名称</th>
             <th>大小</th>
+            <!--
             <th>进度</th>
             <th>状态</th>
             <th>操作</th>
+            -->
           </tr>
           </thead>
           <tbody>
@@ -88,11 +90,12 @@
     </modal-body>
     <modal-footer>
       <button type="button" class="btn btn-default" data-dismiss="createNewTaskModal"
-              (click)="createNewTaskModal.dismiss()">取消
+              (click)="createNewTaskModal.dismiss()" >取消
       </button>
-      <button type="button" class="btn btn-primary" [disabled]="!createNewTaskForm.valid"
-              (click)="createNewTaskModal.close()">开始
+      <button type="button" class="btn btn-primary"
+              (click)="createNewTaskModal.close()" [disabled]="!uploader.getNotUploadedItems().length">开始
       </button>
+
     </modal-footer>
   </form>
 </modal>
@@ -162,6 +165,12 @@
       routerLink="/workspace/scanning-queue">扫描列表</a></li>
     <li [routerLinkActive]="['active']" role="presentation"><a routerLink="/workspace/waiting-queue">待处理列表</a></li>
   </ul>
+</div>
+
+
+<div class="form-group">
+  <input class="form-control" type="text" id="test" [ngModel]="info" >
+  <button (click)="onBtnClicked()"></button>
 </div>
 
 <router-outlet></router-outlet>

@@ -15,12 +15,15 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-
+    <name>Scanner Solution</name>
 
 
     <modules>
         <module>scanner-data</module>
         <module>scanner-common</module>
+        <module>scanner-gateway</module>
+        <module>scanner-processor</module>
+        <module>scanner-eureka</module>
     </modules>
 
 
@@ -39,14 +42,7 @@
     </properties>
 
 
-    <build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
 
 
 </project>

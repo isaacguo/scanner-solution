@@ -1,11 +1,13 @@
-package com.mlreceipt.scanner.scannerdata;
+package com.mlreceipt.scanner.processor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-public class ScannerDataApplicationTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ScannerProcessorApplicationTests {
 
 	@Test
 	public void contextLoads() {
