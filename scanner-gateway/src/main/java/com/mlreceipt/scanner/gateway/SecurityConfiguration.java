@@ -12,37 +12,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // TODO Auto-generated method stub
         httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
-    }
-}
-/*
-@Configuration
-class MyConfiguration {
-
-    @Bean
-    public FilterRegistrationBean corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(0);
-        return bean;
+        httpSecurity.csrf().disable();
     }
 }
 
-*/
-
-/*
- * @Configuration class TestingLabRepositoryApplicationConfiguration extends
- * RepositoryRestMvcConfiguration {
- *
- * @Override protected void
- * configureRepositoryRestConfiguration(RepositoryRestConfiguration config) { //
- * TODO Auto-generated method stub
- * super.configureRepositoryRestConfiguration(config);
- * config.exposeIdsFor(Project.class, Lab.class, Worker.class); } }
- *
- */

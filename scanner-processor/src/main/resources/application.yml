@@ -1,7 +1,6 @@
 server:
   port: 6303
 
-
 spring:
   activemq:
     broker-url: tcp://localhost:61616
@@ -11,4 +10,8 @@ spring:
     pub-sub-domain: true
   application:
     name: ScannerProcessor
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 

@@ -12,5 +12,6 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // TODO Auto-generated method stub
         httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
+        httpSecurity.csrf().disable();
     }
 }

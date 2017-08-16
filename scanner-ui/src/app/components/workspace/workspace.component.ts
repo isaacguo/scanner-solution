@@ -14,12 +14,12 @@ import {UploadService} from "../../services/upload.service";
 export class WorkspaceComponent implements OnInit {
 
   public hasBaseDropZoneOver: boolean = false;
-  public uploader: FileUploader = new FileUploader({url: '/app'});
+  public uploader: FileUploader = new FileUploader({url: '/scannerprocessor/upload/'});
 
   info: string;
 
   constructor(private uploadService: UploadService) {
-
+    this.uploader.options.headers
   }
 
   ngOnInit(): void {
@@ -30,11 +30,13 @@ export class WorkspaceComponent implements OnInit {
   }
 
   onCreateNewTaskButtonClicked(createNewTaskModal: ModalComponent) {
+    this.uploader.clearQueue();
     createNewTaskModal.open();
   }
 
   onCreateNewTaskModalClosed() {
     if (this.uploader.getNotUploadedItems().length)
+      console.log(this.uploader);
       this.uploader.uploadAll();
   }
 

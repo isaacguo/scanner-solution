@@ -12,6 +12,7 @@ export class UploadService {
   }
 
 
+
   getInfo():Observable<string> {
     return this.http.get('/scannerdata').map(this.extractData).catch(this.handleError);
   }
