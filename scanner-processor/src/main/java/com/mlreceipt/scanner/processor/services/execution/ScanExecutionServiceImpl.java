@@ -55,6 +55,11 @@ public class ScanExecutionServiceImpl implements ScanExecutionService {
 
                 //ExecuteWatchdog watchdog = new ExecuteWatchdog(60 * 1000);
                 Executor executor = new DefaultExecutor();
+                Path workingPath=Paths.get(scannerPath);
+
+                logger.info("workingPath:"+workingPath.getParent().toString());
+
+                executor.setWorkingDirectory(workingPath.getParent().toFile());
                 executor.setExitValue(1);
                 //executor.setWorkingDirectory(path2);
                 //executor.setWatchdog(watchdog);
