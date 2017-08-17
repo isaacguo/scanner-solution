@@ -320,3 +320,5 @@ __pycache__/
 
 scanner-ui/tools/
 scanner-gateway/src/main/resources/static/
+
+.vscode
