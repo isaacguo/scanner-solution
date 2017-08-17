@@ -1,5 +1,6 @@
 package com.mlreceipt.scanner.processor;
 
+import com.mlreceipt.scanner.processor.common.ScanExecutorProperties;
 import com.mlreceipt.scanner.processor.common.StorageProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -13,7 +14,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableConfigurationProperties(StorageProperties.class)
+@EnableConfigurationProperties({StorageProperties.class, ScanExecutorProperties.class})
 @EnableAutoConfiguration(exclude={MultipartAutoConfiguration.class})
 public class ScannerProcessorApplication {
 

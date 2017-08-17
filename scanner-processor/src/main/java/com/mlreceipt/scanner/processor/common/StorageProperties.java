@@ -6,9 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("storage")
 public class StorageProperties {
 
-    /**
-     * Folder location for storing files
-     */
     @Value("#{environment['uploadPath']}")
     private String location = ".";
 

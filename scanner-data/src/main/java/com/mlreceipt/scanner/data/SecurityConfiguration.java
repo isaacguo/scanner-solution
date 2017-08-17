@@ -13,5 +13,6 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // TODO Auto-generated method stub
         httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
         httpSecurity.csrf().disable();
+        httpSecurity.headers().frameOptions().disable();
     }
 }
