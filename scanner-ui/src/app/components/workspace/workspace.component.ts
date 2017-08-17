@@ -30,6 +30,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   onCreateNewTaskButtonClicked(createNewTaskModal: ModalComponent) {
+    this.uploader.options.additionalParameter = {'scanid': 1234};
     this.uploader.clearQueue();
     createNewTaskModal.open();
   }
@@ -37,7 +38,7 @@ export class WorkspaceComponent implements OnInit {
   onCreateNewTaskModalClosed() {
     if (this.uploader.getNotUploadedItems().length)
       console.log(this.uploader);
-      this.uploader.uploadAll();
+    this.uploader.uploadAll();
   }
 
   onBtnClicked() {
@@ -45,5 +46,19 @@ export class WorkspaceComponent implements OnInit {
       this.info = r;
     });
 
+  }
+
+  onBtnUploadAllClicked() {
+    this.uploadService.initiateUploading().subscribe(r => {
+      console.log("scanid:" + r.scanid);
+      this.uploader.options.additionalParameter = {'scanid': r.scanid};
+
+      this.uploader.onCompleteAll = () => {
+        this.uploadService.finishUploading(r.scanid).subscribe(re => {
+          console.log(re);
+        });
+      };
+      this.uploader.uploadAll();
+    });
   }
 }

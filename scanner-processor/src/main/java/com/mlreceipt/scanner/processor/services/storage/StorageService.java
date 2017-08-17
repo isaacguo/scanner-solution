@@ -11,7 +11,7 @@ public interface StorageService {
 
     void init();
 
-    String store(MultipartFile file);
+    String store(String uuid, MultipartFile file);
 
     Stream<Path> loadAll();
 
@@ -21,4 +21,5 @@ public interface StorageService {
 
     void deleteAll();
 
+    boolean createFolder(String uuid);
 }
