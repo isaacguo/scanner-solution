@@ -19,7 +19,7 @@ public class ScanTaskEntity {
     String uuid;
     String name;
 
-    public ScanTaskEntity(String uuid) {
+    public ScanTaskEntity() {
         this.uuid = UUID.randomUUID().toString();
     }
 

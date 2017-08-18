@@ -20,7 +20,7 @@ public class ScanPairEntity {
     @JsonBackReference("scantask-scanpair")
     ScanTaskEntity scanTask;
 
-    public ScanPairEntity(String uuid) {
+    public ScanPairEntity() {
         this.uuid = UUID.randomUUID().toString();
     }
 
