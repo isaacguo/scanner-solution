@@ -104,6 +104,11 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
+    public String getFullUploadPath(String uuid) {
+        return this.rootLocation.resolve(uuid).toString();
+    }
+
+    @Override
     public void init() {
         try {
             Files.createDirectories(rootLocation);

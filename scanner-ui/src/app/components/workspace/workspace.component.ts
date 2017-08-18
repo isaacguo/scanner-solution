@@ -16,6 +16,8 @@ export class WorkspaceComponent implements OnInit {
   public hasBaseDropZoneOver: boolean = false;
   public uploader: FileUploader = new FileUploader({url: '/scannerprocessor/upload/'});
 
+  scanid:string;
+
   info: string;
 
   constructor(private uploadService: UploadService) {
@@ -30,15 +32,16 @@ export class WorkspaceComponent implements OnInit {
   }
 
   onCreateNewTaskButtonClicked(createNewTaskModal: ModalComponent) {
-    this.uploader.options.additionalParameter = {'scanid': 1234};
+    this.scanid=null;
+    console.log(this.scanid);
+    console.log(this.scanid==null);
+    console.log(this.checkScanIdIsEmpty());
     this.uploader.clearQueue();
     createNewTaskModal.open();
   }
 
   onCreateNewTaskModalClosed() {
-    if (this.uploader.getNotUploadedItems().length)
-      console.log(this.uploader);
-    this.uploader.uploadAll();
+
   }
 
   onBtnClicked() {
@@ -50,6 +53,7 @@ export class WorkspaceComponent implements OnInit {
 
   onBtnUploadAllClicked() {
     this.uploadService.initiateUploading().subscribe(r => {
+      this.scanid=r.scanid;
       console.log("scanid:" + r.scanid);
       this.uploader.options.additionalParameter = {'scanid': r.scanid};
 
@@ -61,4 +65,10 @@ export class WorkspaceComponent implements OnInit {
       this.uploader.uploadAll();
     });
   }
+
+  checkScanIdIsEmpty(): boolean
+  {
+    return (this.scanid == null) || (this.scanid === "" );
+  }
+
 }

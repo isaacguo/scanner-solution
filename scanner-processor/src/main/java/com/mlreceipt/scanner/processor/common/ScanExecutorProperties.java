@@ -12,12 +12,23 @@ public class ScanExecutorProperties {
     @Value("#{environment['scannerOutputPath']}")
     private String scannerOutputPath = "";
 
+    @Value("#{environment['scannerInputPath']}")
+    private String scannerInputPath="";
+
     public String getScannerPath() {
         return scannerPath;
     }
 
     public void setScannerPath(String scannerPath) {
         this.scannerPath = scannerPath;
+    }
+
+    public String getScannerInputPath() {
+        return scannerInputPath;
+    }
+
+    public void setScannerInputPath(String scannerInputPath) {
+        this.scannerInputPath = scannerInputPath;
     }
 
     public String getScannerOutputPath() {

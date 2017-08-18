@@ -14,6 +14,16 @@ public class ScanPairEntity {
     String uuid;
 
     String imagePath;
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    String imageName;
     String text;
 
     @ManyToOne

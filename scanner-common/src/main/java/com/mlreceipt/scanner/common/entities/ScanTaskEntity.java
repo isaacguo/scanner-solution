@@ -1,6 +1,7 @@
 package com.mlreceipt.scanner.common.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mlreceipt.scanner.common.enums.ScanTaskStatusEnum;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -19,7 +20,10 @@ public class ScanTaskEntity {
     String uuid;
     String name;
 
+    ScanTaskStatusEnum status;
+
     public ScanTaskEntity() {
+        status=ScanTaskStatusEnum.CREATED;
         this.uuid = UUID.randomUUID().toString();
     }
 

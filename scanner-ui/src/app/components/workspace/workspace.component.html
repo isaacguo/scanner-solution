@@ -75,7 +75,7 @@
               (click)="createNewTaskModal.dismiss()">取消
       </button>
       <button type="button" class="btn btn-primary"
-              (click)="createNewTaskModal.close()" [disabled]="!uploader.getNotUploadedItems().length">完成
+              (click)="createNewTaskModal.close()" [disabled]="uploader.getNotUploadedItems().length || checkScanIdIsEmpty()">完成
       </button>
 
     </modal-footer>

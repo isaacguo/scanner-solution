@@ -22,4 +22,6 @@ public interface StorageService {
     void deleteAll();
 
     boolean createFolder(String uuid);
+
+    String getFullUploadPath(String uuid);
 }
