@@ -21,6 +21,9 @@ public class ScanTaskEntity {
     String name;
 
     ScanTaskStatusEnum status;
+    @OneToMany(mappedBy = "scanTask", cascade = CascadeType.ALL)
+    @JsonManagedReference("scantask-scanpair")
+    List<ScanPairEntity> scanPairList = new LinkedList<>();
 
     public ScanTaskEntity() {
         status=ScanTaskStatusEnum.CREATED;
@@ -61,8 +64,11 @@ public class ScanTaskEntity {
         this.scanPairList.add(scanPair);
     }
 
-    @OneToMany(mappedBy = "scanTask")
-    @JsonManagedReference("scantask-scanpair")
-    List<ScanPairEntity> scanPairList = new LinkedList<>();
+    public ScanTaskStatusEnum getStatus() {
+        return status;
+    }
 
+    public void setStatus(ScanTaskStatusEnum status) {
+        this.status = status;
+    }
 }

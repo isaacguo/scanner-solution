@@ -13,16 +13,11 @@
       </tr>
       </thead>
       <tbody>
-      <td></td>
-      <td></td>
-
-      <td>
-        <div class="btn-group btn-group-sm" role="group" aria-label="...">
-          <button type="button" class="btn btn-default"><span
-            class="glyphicon glyphicon-remove"></span></button>
-        </div>
-      </td>
-
+      <tr *ngFor="let scanTask of scanTasks">
+        <td>{{ scanTask?.uuid }}</td>
+        <td></td>
+        <td></td>
+      </tr>
       </tbody>
     </table>
   </div>

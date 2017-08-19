@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ScanTaskService} from "../../../services/scantask.service";
+import {ScanTask} from "../../../models/scantask.model";
+import {ScanTaskStatusEnum} from "../../../enums/scantaskstatus.enum";
 
 @Component({
   selector: 'app-scanning-queue',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScanningQueueComponent implements OnInit {
 
-  constructor() { }
+  scanTasks: ScanTask[];
+
+  constructor(private scanTaskService: ScanTaskService) {
+  }
 
   ngOnInit() {
+    //this.scanTaskService.getScanTasks().subscribe(r => this.scanTasks = r);
+    this.scanTaskService.getScanTaskByStatus(ScanTaskStatusEnum.UPLOADED).subscribe(r => this.scanTasks = r);
   }
 
 }
