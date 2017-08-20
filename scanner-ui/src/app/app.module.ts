@@ -16,6 +16,7 @@ import { ScanningQueueComponent } from './components/workspace/scanning-queue/sc
 import {UploadService} from "./services/upload.service";
 import {HttpModule} from "@angular/http";
 import {ScanTaskService} from "./services/scantask.service";
+import {ImageService} from "./services/image.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import {ScanTaskService} from "./services/scantask.service";
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     UploadService,
-    ScanTaskService
+    ScanTaskService,
+    ImageService
+
   ],
   bootstrap: [AppComponent]
 })

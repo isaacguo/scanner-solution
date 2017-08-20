@@ -1,3 +1,25 @@
+<modal  id="mymodal" #showManualCheckDialogModal (onClose)="onShowManualCheckDialogModal()" >
+  <form #showManualCheckDialogForm="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">检查</h4>
+    </modal-header>
+    <modal-body>
+
+      <img id="myimg" [src]="imagePath" />
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-default" data-dismiss="showManualCheckDialogModal"
+              (click)="showManualCheckDialogModal.dismiss()">取消
+      </button>
+      <button type="button" class="btn btn-primary"
+              (click)="showManualCheckDialogModal.close()" >完成
+      </button>
+
+    </modal-footer>
+  </form>
+</modal>
+
 <div class="row">
   <div class="panel panel-default">
     <!-- Default panel contents -->
@@ -14,7 +36,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let scanTask of scanTasks">
-        <td>{{scanTask?.uuid}}</td>
+        <td><a href="javascript:void(0)" (click)="onScanTaskClicked(showManualCheckDialogModal, scanTask.uuid)">{{scanTask?.uuid}}</a></td>
         <td>{{scanTask?.scanPairList?.length}}</td>
         <td></td>
         <td>

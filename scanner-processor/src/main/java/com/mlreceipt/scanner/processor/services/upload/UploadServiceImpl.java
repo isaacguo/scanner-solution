@@ -63,7 +63,12 @@ public class UploadServiceImpl implements UploadService {
         dataFeignClient.insertScanTask(scanTaskEntity);
 
         //start to execute
-        this.scanExecutionService.execute(uuid);
+        this.scanExecutionService.execute(uuid,scanTaskEntity);
+
+
+
+
+
         return "{\"result\":\"success\"}";
     }
 }

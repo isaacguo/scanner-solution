@@ -20,4 +20,6 @@ export class ScanningQueueComponent implements OnInit {
     this.scanTaskService.getScanTaskByStatus(ScanTaskStatusEnum.UPLOADED).subscribe(r => this.scanTasks = r);
   }
 
+
+
 }
