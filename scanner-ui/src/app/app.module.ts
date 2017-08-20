@@ -15,6 +15,7 @@ import {WaitingQueueComponent} from './components/workspace/waiting-queue/waitin
 import { ScanningQueueComponent } from './components/workspace/scanning-queue/scanning-queue.component';
 import {UploadService} from "./services/upload.service";
 import {HttpModule} from "@angular/http";
+import {ScanTaskService} from "./services/scantask.service";
 
 @NgModule({
   declarations: [
@@ -31,8 +32,8 @@ import {HttpModule} from "@angular/http";
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
-    UploadService
-
+    UploadService,
+    ScanTaskService
   ],
   bootstrap: [AppComponent]
 })

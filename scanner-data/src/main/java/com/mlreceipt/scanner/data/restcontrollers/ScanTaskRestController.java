@@ -1,10 +1,9 @@
 package com.mlreceipt.scanner.data.restcontrollers;
 
 import com.mlreceipt.scanner.common.entities.ScanTaskEntity;
+import com.mlreceipt.scanner.common.enums.ScanTaskStatusEnum;
 import com.mlreceipt.scanner.data.services.scantask.ScanTaskService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,15 +11,24 @@ import java.util.List;
 @RequestMapping("/scantasks")
 public class ScanTaskRestController {
 
-   private final ScanTaskService scanTaskService;
+    private final ScanTaskService scanTaskService;
 
-   public ScanTaskRestController(ScanTaskService scanTaskService) {
-      this.scanTaskService = scanTaskService;
-   }
+    public ScanTaskRestController(ScanTaskService scanTaskService) {
+        this.scanTaskService = scanTaskService;
+    }
 
-   @GetMapping
-   public List<ScanTaskEntity> getScanTasks()
-   {
-      return this.scanTaskService.getScanTasks();
-   }
+    @GetMapping
+    public List<ScanTaskEntity> getScanTasks() {
+        return this.scanTaskService.getScanTasks();
+    }
+
+    @GetMapping("/bystatus/{status}/")
+    public List<ScanTaskEntity> getScanTasksByStatus(@PathVariable("status") ScanTaskStatusEnum status) {
+        return this.scanTaskService.getScanTasksByStatus(status);
+    }
+
+    @PostMapping("/insert")
+    public ScanTaskEntity insertScanTask(@RequestBody ScanTaskEntity scanTaskEntity) {
+        return this.scanTaskService.insertScanTask(scanTaskEntity);
+    }
 }

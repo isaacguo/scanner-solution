@@ -18,6 +18,10 @@ const appRoutes: Routes = [
     children:
       [
         {
+          path:'',
+          component:ScanningQueueComponent,
+        },
+        {
           path:'scanning-queue',
           component:ScanningQueueComponent,
         },

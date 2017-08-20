@@ -20,6 +20,7 @@ public class BeanConfiguration {
     @Bean
     public TaskExecutor getTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setMaxPoolSize(1);
         return taskExecutor;
     }
 }

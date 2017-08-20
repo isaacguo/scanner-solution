@@ -6,6 +6,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("scanner")
 public class ScanExecutorProperties {
 
+    public String getUploadPath() {
+        return uploadPath;
+    }
+
+    public void setUploadPath(String uploadPath) {
+        this.uploadPath = uploadPath;
+    }
+
+    @Value("#{environment['uploadPath']}")
+    private String uploadPath = ".";
+
     @Value("#{environment['scannerPath']}")
     private String scannerPath = "";
 

@@ -14,6 +14,14 @@ public class ScanPairEntity {
     String uuid;
 
     String imagePath;
+    String imageName;
+    String text;
+    @ManyToOne
+    @JsonBackReference("scantask-scanpair")
+    ScanTaskEntity scanTask;
+    public ScanPairEntity() {
+        this.uuid = UUID.randomUUID().toString();
+    }
 
     public String getImageName() {
         return imageName;
@@ -21,17 +29,6 @@ public class ScanPairEntity {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
-    }
-
-    String imageName;
-    String text;
-
-    @ManyToOne
-    @JsonBackReference("scantask-scanpair")
-    ScanTaskEntity scanTask;
-
-    public ScanPairEntity() {
-        this.uuid = UUID.randomUUID().toString();
     }
 
     public Long getId() {

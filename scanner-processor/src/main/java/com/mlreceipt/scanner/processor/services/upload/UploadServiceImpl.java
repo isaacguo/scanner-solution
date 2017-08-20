@@ -2,23 +2,26 @@ package com.mlreceipt.scanner.processor.services.upload;
 
 import com.mlreceipt.scanner.common.entities.ScanPairEntity;
 import com.mlreceipt.scanner.common.entities.ScanTaskEntity;
+import com.mlreceipt.scanner.common.enums.ScanTaskStatusEnum;
+import com.mlreceipt.scanner.processor.feignclients.DataFeignClient;
 import com.mlreceipt.scanner.processor.services.execution.ScanExecutionService;
 import com.mlreceipt.scanner.processor.services.storage.StorageService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.UUID;
 
 @Service
 public class UploadServiceImpl implements UploadService {
 
-    public UploadServiceImpl(StorageService storageService, ScanExecutionService scanExecutionService) {
+    public UploadServiceImpl(DataFeignClient dataFeignClient, StorageService storageService, ScanExecutionService scanExecutionService) {
+        this.dataFeignClient = dataFeignClient;
         this.storageService = storageService;
         this.scanExecutionService = scanExecutionService;
     }
 
+    private DataFeignClient dataFeignClient;
     private StorageService storageService;
     private ScanExecutionService scanExecutionService;
 
@@ -55,6 +58,9 @@ public class UploadServiceImpl implements UploadService {
                 scanTaskEntity.addScanPair(spe);
             }
         }
+
+        scanTaskEntity.setStatus(ScanTaskStatusEnum.UPLOADED);
+        dataFeignClient.insertScanTask(scanTaskEntity);
 
         //start to execute
         this.scanExecutionService.execute(uuid);
