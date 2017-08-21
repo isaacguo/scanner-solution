@@ -21,23 +21,24 @@ import javax.transaction.Transactional;
 @EntityScan("com.mlreceipt.scanner")
 public class ScannerDataApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ScannerDataApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ScannerDataApplication.class, args);
+    }
 }
 
 @Configuration
 @Transactional
 class MyConf {
-	@Bean
-	CommandLineRunner commandLineRunner(ScanTaskService scanTaskService) {
+    @Bean
+    CommandLineRunner commandLineRunner(ScanTaskService scanTaskService) {
 
 
-		return new CommandLineRunner() {
+        return new CommandLineRunner() {
 
 
-			@Override
-			public void run(String... strings) throws Exception {
+            @Override
+            public void run(String... strings) throws Exception {
+                /*
 				ScanTaskEntity scanTaskEntity=new ScanTaskEntity();
 				scanTaskEntity.setStatus(ScanTaskStatusEnum.SCANNED);
 
@@ -52,8 +53,8 @@ class MyConf {
 				scanTaskEntity.addScanPair(scanPairEntity1);
 
 				scanTaskService.insertScanTask(scanTaskEntity);
-			}
-
-		};
-	}
+				*/
+            }
+        };
+    }
 }

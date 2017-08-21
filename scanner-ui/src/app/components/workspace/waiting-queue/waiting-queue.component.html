@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-4 ">
           <label for="scannedText" >扫描的文字</label>
-          <textarea class="form-control" id="scannedText"
+          <textarea rows="30" class="form-control" id="scannedText"
                     required
                     [(ngModel)]="selectedScanTask?.scanPairList[selectedScanPairIndex].text" name="scannedText"
                     #name="ngModel"
