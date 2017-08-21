@@ -15,6 +15,8 @@ public class ScanPairEntity {
 
     String imagePath;
     String imageName;
+    @Lob
+    @Column(length = 100000)
     String text;
     @ManyToOne
     @JsonBackReference("scantask-scanpair")
