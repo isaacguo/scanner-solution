@@ -1,4 +1,16 @@
-#myimg
+.my-modal {
+  width: 95%;
+}
+
+.imgClass
 {
-  max-width:850px;
+  width:100%
+}
+
+.box textarea {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  border: 1px solid black;
+  display: block;
+  background-color: rgba(0,0,0,0.1);
 }

@@ -60,12 +60,11 @@ public class UploadServiceImpl implements UploadService {
         }
 
         scanTaskEntity.setStatus(ScanTaskStatusEnum.UPLOADED);
+        scanTaskEntity.setUuid(uuid);
         dataFeignClient.insertScanTask(scanTaskEntity);
 
         //start to execute
         this.scanExecutionService.execute(uuid,scanTaskEntity);
-
-
 
 
 

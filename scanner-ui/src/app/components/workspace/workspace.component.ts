@@ -1,5 +1,5 @@
-import {OnInit, Component, Directive} from "@angular/core";
-import {FileDropDirective, FileUploader} from "ng2-file-upload/ng2-file-upload";
+import {OnInit, Component, ViewEncapsulation} from "@angular/core";
+import {FileUploader} from "ng2-file-upload/ng2-file-upload";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
 import {UploadService} from "../../services/upload.service";
 
@@ -10,13 +10,15 @@ import {UploadService} from "../../services/upload.service";
 @Component({
   selector: 'workspace',
   templateUrl: './workspace.component.html',
+  styleUrls: ['./workspace.component.css'],
+
 })
 export class WorkspaceComponent implements OnInit {
 
   public hasBaseDropZoneOver: boolean = false;
   public uploader: FileUploader = new FileUploader({url: '/scannerprocessor/upload/'});
 
-  scanid:string;
+  scanid: string;
 
   info: string;
 
@@ -32,9 +34,9 @@ export class WorkspaceComponent implements OnInit {
   }
 
   onCreateNewTaskButtonClicked(createNewTaskModal: ModalComponent) {
-    this.scanid=null;
+    this.scanid = null;
     console.log(this.scanid);
-    console.log(this.scanid==null);
+    console.log(this.scanid == null);
     console.log(this.checkScanIdIsEmpty());
     this.uploader.clearQueue();
     createNewTaskModal.open();
@@ -53,7 +55,7 @@ export class WorkspaceComponent implements OnInit {
 
   onBtnUploadAllClicked() {
     this.uploadService.initiateUploading().subscribe(r => {
-      this.scanid=r.scanid;
+      this.scanid = r.scanid;
       console.log("scanid:" + r.scanid);
       this.uploader.options.additionalParameter = {'scanid': r.scanid};
 
@@ -66,8 +68,7 @@ export class WorkspaceComponent implements OnInit {
     });
   }
 
-  checkScanIdIsEmpty(): boolean
-  {
+  checkScanIdIsEmpty(): boolean {
     return (this.scanid == null) || (this.scanid === "" );
   }
 
