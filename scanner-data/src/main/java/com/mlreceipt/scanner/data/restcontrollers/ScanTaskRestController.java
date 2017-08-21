@@ -31,4 +31,10 @@ public class ScanTaskRestController {
     public ScanTaskEntity insertScanTask(@RequestBody ScanTaskEntity scanTaskEntity) {
         return this.scanTaskService.insertScanTask(scanTaskEntity);
     }
+    @PostMapping("/update")
+    public ScanTaskEntity updateScanTask()
+    {
+        return null;
+
+    }
 }

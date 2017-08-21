@@ -1,19 +1,35 @@
-<modal  id="mymodal" #showManualCheckDialogModal (onClose)="onShowManualCheckDialogModal()" >
+<modal #showManualCheckDialogModal (onClose)="onShowManualCheckDialogModal()" [cssClass]="'my-modal'">
   <form #showManualCheckDialogForm="ngForm">
     <modal-header [show-close]="true">
       <h4 class="modal-title">检查</h4>
     </modal-header>
     <modal-body>
-
-      <img id="myimg" [src]="imagePath" />
-
+      <div class="row">
+        <div class="col-sm-8">
+          <img id="myimg" class="imgClass" [src]="imagePath"/>
+        </div>
+        <div class="col-sm-4 ">
+          <label for="scannedText" >扫描的文字</label>
+          <textarea class="form-control" id="scannedText"
+                    required
+                    [(ngModel)]="selectedScanTask?.scanPairList[selectedScanPairIndex].text" name="scannedText"
+                    #name="ngModel"
+          ></textarea>
+        </div>
+      </div>
     </modal-body>
     <modal-footer>
+      <button type="button" class="btn btn-default" data-dismiss="showManualCheckDialogModal"
+              (click)="onShowPrevClicked()"><span class="glyphicon glyphicon-arrow-left"></span> 上一个
+      </button>
+      <button type="button" class="btn btn-default" data-dismiss="showManualCheckDialogModal"
+              (click)="onShowNextClicked()"><span class="glyphicon glyphicon-arrow-right"></span> 下一个
+      </button>
       <button type="button" class="btn btn-default" data-dismiss="showManualCheckDialogModal"
               (click)="showManualCheckDialogModal.dismiss()">取消
       </button>
       <button type="button" class="btn btn-primary"
-              (click)="showManualCheckDialogModal.close()" >完成
+              (click)="showManualCheckDialogModal.close()">完成
       </button>
 
     </modal-footer>
@@ -36,7 +52,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let scanTask of scanTasks">
-        <td><a href="javascript:void(0)" (click)="onScanTaskClicked(showManualCheckDialogModal, scanTask.uuid)">{{scanTask?.uuid}}</a></td>
+        <td><a href="javascript:void(0)" (click)="onScanTaskClicked(showManualCheckDialogModal, scanTask)">{{scanTask?.uuid}}</a>
+        </td>
         <td>{{scanTask?.scanPairList?.length}}</td>
         <td></td>
         <td>
