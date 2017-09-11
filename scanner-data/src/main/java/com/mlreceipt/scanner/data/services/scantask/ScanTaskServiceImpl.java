@@ -23,6 +23,9 @@ public class ScanTaskServiceImpl implements ScanTaskService {
 
     @Override
     public ScanTaskEntity insertScanTask(ScanTaskEntity scanTask) {
+        ScanTaskEntity entity = this.scanTaskRepository.findByUuid(scanTask.getUuid());
+        if (entity != null)
+            this.scanTaskRepository.delete(entity);
         return this.scanTaskRepository.save(scanTask);
     }
 

@@ -1,8 +1,11 @@
 package com.mlreceipt.scanner.common.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,12 +18,27 @@ public class ScanPairEntity {
 
     String imagePath;
     String imageName;
-    @Lob
-    @Column(length = 100000)
-    String text;
+
+
+    @OneToMany(mappedBy = "scanPair", cascade = CascadeType.ALL)
+    @JsonManagedReference("scanpair-scanitem")
+    List<ScanItemEntity> scanItems=new LinkedList<>();
+
+    public List<ScanItemEntity> getScanItems() {
+        return scanItems;
+    }
+
+    public void addScanItem(ScanItemEntity scanItem) {
+        if (scanItem != null) {
+            scanItem.setScanPair(this);
+            this.scanItems.add(scanItem);
+        }
+    }
+
     @ManyToOne
     @JsonBackReference("scantask-scanpair")
     ScanTaskEntity scanTask;
+
     public ScanPairEntity() {
         this.uuid = UUID.randomUUID().toString();
     }
@@ -57,13 +75,6 @@ public class ScanPairEntity {
         this.imagePath = imagePath;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public ScanTaskEntity getScanTask() {
         return scanTask;

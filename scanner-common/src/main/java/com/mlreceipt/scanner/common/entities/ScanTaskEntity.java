@@ -13,6 +13,10 @@ import java.util.UUID;
 @Table(name = "ScanTask")
 public class ScanTaskEntity {
 
+    public void setScanPairList(List<ScanPairEntity> scanPairList) {
+        this.scanPairList = scanPairList;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

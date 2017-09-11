@@ -1,5 +1,7 @@
 package com.mlreceipt.scanner.processor.services.execution;
 
+import com.mlreceipt.scanner.common.entities.ScanItemEntity;
+import com.mlreceipt.scanner.common.entities.ScanPairEntity;
 import com.mlreceipt.scanner.common.entities.ScanTaskEntity;
 import com.mlreceipt.scanner.common.enums.ScanTaskStatusEnum;
 import com.mlreceipt.scanner.processor.common.ScanExecutorProperties;
@@ -23,6 +25,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class ScanExecutionServiceImpl implements ScanExecutionService {
@@ -45,7 +49,7 @@ public class ScanExecutionServiceImpl implements ScanExecutionService {
         this.scannerOutputPath = Paths.get(properties.getScannerOutputPath());
         this.uploadPath = properties.getUploadPath();
         this.scannerInputPath = Paths.get(properties.getScannerInputPath());
-        this.dataFeignClient=dataFeignClient;
+        this.dataFeignClient = dataFeignClient;
 
     }
 
@@ -74,13 +78,45 @@ public class ScanExecutionServiceImpl implements ScanExecutionService {
 
             //update scanTaskEntity
             scanTaskEntity.getScanPairList().stream().forEach(r -> {
-                String textFile=FilenameUtils.removeExtension(r.getImageName())+".txt";
-                Path path=scannerOutputPath.resolve(textFile);
-                r.setText(readFileText(path.toString()));
+                String textFile = FilenameUtils.removeExtension(r.getImageName()) + ".txt";
+                Path textFilePath = scannerOutputPath.resolve(textFile);
+
+                String probabilityFile = FilenameUtils.removeExtension(r.getImageName()) + "_value.txt";
+                Path probabilityFilePath = scannerOutputPath.resolve(probabilityFile);
+                readFileText(r, textFilePath.toString(), probabilityFilePath.toString());
+
             });
             scanTaskEntity.setStatus(ScanTaskStatusEnum.SCANNED);
             dataFeignClient.insertScanTask(scanTaskEntity);
         }
+
+        private void readFileText(ScanPairEntity r, String textFilePath, String probabilityFilePath) {
+
+
+            String scanText;
+            int probabilityValue;
+            try {
+                BufferedReader textInput = new BufferedReader(new FileReader(textFilePath));
+                BufferedReader probabilityValueInput = new BufferedReader(new FileReader(probabilityFilePath));
+                try {
+                    String line = null;
+                    String pro = null;
+                    while ((line = textInput.readLine()) != null) {
+                        pro = probabilityValueInput.readLine();
+                        ScanItemEntity scanItemEntity = new ScanItemEntity(line, Integer.parseInt(pro));
+                        r.addScanItem(scanItemEntity);
+
+                    }
+                } finally {
+                    textInput.close();
+                    probabilityValueInput.close();
+
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
 
         private String readFileText(String path) {
             StringBuilder contents = new StringBuilder();

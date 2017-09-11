@@ -9,4 +9,6 @@ import java.util.List;
 public interface ScanTaskRepository extends JpaRepository<ScanTaskEntity, Long> {
 
     List<ScanTaskEntity> findByStatus(ScanTaskStatusEnum status);
+
+    ScanTaskEntity findByUuid(String uuid);
 }

@@ -1,8 +1,10 @@
 package com.mlreceipt.scanner.data;
 
+import com.mlreceipt.scanner.common.entities.GeneralSettingEntity;
 import com.mlreceipt.scanner.common.entities.ScanPairEntity;
 import com.mlreceipt.scanner.common.entities.ScanTaskEntity;
 import com.mlreceipt.scanner.common.enums.ScanTaskStatusEnum;
+import com.mlreceipt.scanner.data.repositories.GeneralSettingRepository;
 import com.mlreceipt.scanner.data.services.scantask.ScanTaskService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +32,7 @@ public class ScannerDataApplication {
 @Transactional
 class MyConf {
     @Bean
-    CommandLineRunner commandLineRunner(ScanTaskService scanTaskService) {
+    CommandLineRunner commandLineRunner(ScanTaskService scanTaskService, GeneralSettingRepository generalSettingRepository) {
 
 
         return new CommandLineRunner() {
@@ -38,6 +40,13 @@ class MyConf {
 
             @Override
             public void run(String... strings) throws Exception {
+
+                GeneralSettingEntity generalSettingEntity=new GeneralSettingEntity();
+                generalSettingEntity.setThreshold(90);
+
+                generalSettingRepository.save(generalSettingEntity);
+
+
                 /*
 				ScanTaskEntity scanTaskEntity=new ScanTaskEntity();
 				scanTaskEntity.setStatus(ScanTaskStatusEnum.SCANNED);
