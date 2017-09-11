@@ -17,6 +17,8 @@ import {UploadService} from "./services/upload.service";
 import {HttpModule} from "@angular/http";
 import {ScanTaskService} from "./services/scantask.service";
 import {ImageService} from "./services/image.service";
+import { GeneralComponent } from './components/settings/general/general.component';
+import { GeneralSettingService } from "./services/general_setting.service";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {ImageService} from "./services/image.service";
     SettingsComponent,
     WaitingQueueComponent,
     ScanningQueueComponent,
+    GeneralComponent,
   ],
   imports: [
     BrowserModule, FormsModule, routing, Ng2Bs3ModalModule, FileUploadModule, HttpModule
@@ -35,7 +38,8 @@ import {ImageService} from "./services/image.service";
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     UploadService,
     ScanTaskService,
-    ImageService
+    ImageService,
+    GeneralSettingService
 
   ],
   bootstrap: [AppComponent]

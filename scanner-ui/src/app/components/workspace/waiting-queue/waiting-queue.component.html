@@ -9,12 +9,17 @@
           <img id="myimg" class="imgClass" [src]="imagePath"/>
         </div>
         <div class="col-sm-4 ">
-          <label for="scannedText" >扫描的文字</label>
-          <textarea rows="30" class="form-control" id="scannedText"
-                    required
-                    [(ngModel)]="selectedScanTask?.scanPairList[selectedScanPairIndex].text" name="scannedText"
-                    #name="ngModel"
-          ></textarea>
+           <label for="scannedText" >高亮阈值</label>
+<input type="number" min=0 max=100 name="thresholdValue" id="thresholdValue" required class="form-control" [(ngModel)]="generalSetting.threshold">
+        <hr/>
+<label for="scannedText" >扫描的文字</label>
+          <ul class="list-group">
+            <li *ngFor="let scanItem of selectedScanTask?.scanPairList[selectedScanPairIndex].scanItems" 
+                 class="list-group-item"
+                 [class.list-group-item-danger]="scanItem.probability<generalSetting.threshold">
+              {{scanItem.text}}
+            </li>
+          </ul>
         </div>
       </div>
     </modal-body>

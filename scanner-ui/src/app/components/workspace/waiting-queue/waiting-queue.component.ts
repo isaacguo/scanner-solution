@@ -4,13 +4,14 @@ import {ScanTaskService} from "../../../services/scantask.service";
 import {ScanTask} from "../../../models/scantask.model";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ImageService} from "../../../services/image.service";
+import { GeneralSetting } from "../../../models/general_setting.model";
+import { GeneralSettingService } from "../../../services/general_setting.service";
 
 @Component({
   selector: 'app-waiting-queue',
   templateUrl: './waiting-queue.component.html',
   styleUrls: ['./waiting-queue.component.css'],
   encapsulation: ViewEncapsulation.None
-
 })
 export class WaitingQueueComponent implements OnInit {
 
@@ -18,13 +19,18 @@ export class WaitingQueueComponent implements OnInit {
   selectedScanTask: ScanTask;
   selectedScanPairIndex: number = 0;
   imagePath: string;
+  generalSetting:GeneralSetting={};
 
-  constructor(private scanTaskService: ScanTaskService, imageService: ImageService) {
+  constructor(private scanTaskService: ScanTaskService, imageService: ImageService,private generalSettingService:GeneralSettingService) {
   }
 
   ngOnInit() {
     //this.scanTaskService.getScanTasks().subscribe(r => this.scanTasks = r);
     this.scanTaskService.getScanTaskByStatus(ScanTaskStatusEnum.SCANNED).subscribe(r => this.scanTasks = r);
+    this.generalSettingService.getSettings().subscribe(r=>{
+      this.generalSetting=r;
+    });
+
   }
 
   onShowManualCheckDialogModal() {

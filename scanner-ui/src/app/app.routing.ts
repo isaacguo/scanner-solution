@@ -6,6 +6,7 @@ import {SettingsComponent} from "./components/settings/settings.component";
 import {NotFoundComponent} from "./components/notfound/notfound.component";
 import {WaitingQueueComponent} from "./components/workspace/waiting-queue/waiting-queue.component";
 import {ScanningQueueComponent} from "./components/workspace/scanning-queue/scanning-queue.component";
+import { GeneralComponent } from "./components/settings/general/general.component";
 
 const appRoutes: Routes = [
   {
@@ -33,7 +34,10 @@ const appRoutes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
+    children:[
+      {path:'general',component:GeneralComponent}
+    ]
   },
   {
     path:'**',
