@@ -1,3 +1,4 @@
+#!/usr/bin/sh
 nohup java -jar scanner-data-0.0.1-SNAPSHOT.jar &
 nohup java -jar scanner-eureka-0.0.1-SNAPSHOT.jar &
 nohup java -jar scanner-gateway-0.0.1-SNAPSHOT.jar &
